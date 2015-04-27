@@ -27,7 +27,7 @@ class UsersController extends AppController {
                     'email' => trim($this->request->data['User']['email']),
                     'password' => trim($this->request->data['User']['password']),
                     'role' => '2',
-                    'status' => '',
+                    'status' => 'Able',
                     'created' => date("Y-m-d H:i:s"),
                     'modified' => date("Y-m-d H:i:s"),
                 ]
@@ -40,6 +40,10 @@ class UsersController extends AppController {
                 $this->Session->setFlash("fail");
             }
         }
+    }
+
+    public  function badges(){
+        
     }
 
     public function editprofile($id = null) {

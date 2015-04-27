@@ -11,6 +11,31 @@ class AdminsController extends AppController {
         $this->set('User', $User);
     }
 
+    public function account() {
+        $this->loadModel('User');
+        $users = $this->User->find('all',array(
+            'conditions' => array('User.status' => 'Able','User.role' => '2')
+        ));
+        $this->set('users', $users);
+    }
+
+    public function block($id=null) {
+        $this->loadModel('User');
+        $data = [
+            'User' => [
+                'id' => $id,
+                'status' => 'Block'
+            ]
+        ];
+        if ($this->User->save($data)) {
+            $this->Session->setFlash('Block deck is success', 'default', array("class" => 'alert alert-success', 'style' => 'position:'));
+        } else {
+            $this->Session->setFlash('Block deck is fail', 'default', array("class" => 'alert alert-danger', 'style' => 'position:'));
+        }
+        $this->set('id', $id);
+    }
+
+
     public function deck() {
         $this->loadModel('Deck');
         $disable = $this->Deck->find('all',array(
@@ -42,7 +67,7 @@ class AdminsController extends AppController {
             if ($this->Deck->save($data)) {
                 $this->Session->setFlash('Able deck is success', 'default', array("class" => 'alert alert-success', 'style' => 'position:'));
             } else {
-                $this->Session->setFlash('Able deck is success', 'default', array("class" => 'alert alert-danger', 'style' => 'position:'));
+                $this->Session->setFlash('Able deck is fail', 'default', array("class" => 'alert alert-danger', 'style' => 'position:'));
             }
             //pr($this->request->data);
         $this->set('id', $id);
@@ -61,7 +86,7 @@ class AdminsController extends AppController {
         if ($this->Deck->save($data)) {
             $this->Session->setFlash('Able deck is success', 'default', array("class" => 'alert alert-success', 'style' => 'position:'));
         } else {
-            $this->Session->setFlash('Able deck is success', 'default', array("class" => 'alert alert-danger', 'style' => 'position:'));
+            $this->Session->setFlash('Able deck is fail', 'default', array("class" => 'alert alert-danger', 'style' => 'position:'));
         }
         //pr($this->request->data);
         $this->set('id', $id);
@@ -79,7 +104,7 @@ class AdminsController extends AppController {
         if ($this->Deck->save($data)) {
             $this->Session->setFlash('Able deck is success', 'default', array("class" => 'alert alert-success', 'style' => 'position:'));
         } else {
-            $this->Session->setFlash('Able deck is success', 'default', array("class" => 'alert alert-danger', 'style' => 'position:'));
+            $this->Session->setFlash('Able deck is fail', 'default', array("class" => 'alert alert-danger', 'style' => 'position:'));
         }
         //pr($this->request->data);
         $this->set('id', $id);
