@@ -15,3 +15,5 @@
  */
 
 require 'webroot' . DIRECTORY_SEPARATOR . 'index.php';
+
+	Router::connect('/', array('controller' => 'users', 'action' => 'login'));
