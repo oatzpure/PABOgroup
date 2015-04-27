@@ -200,11 +200,10 @@ class UsersController extends AppController {
         $User = $this->Session->read('User');
         if($User==null or $User['User']['role']!=2){
             return false;
-            //$this->redirect(['action' => 'login']);
+            $this->redirect(['action' => 'login']);
         }else{
             return true;
         }
-
     }
 
     function uploadFiles($image=null)

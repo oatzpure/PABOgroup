@@ -10,6 +10,7 @@ App::uses('AppController', 'Controller');
 
 class DecksController extends AppController{
     public function add() {
+        if($this->checkSession()) {
         $this->loadModel('Category');
         $categorys = $this->Category->find('all', [
             'order' => [
@@ -208,7 +209,7 @@ class DecksController extends AppController{
             }else{
                 $this->Session->setFlash('Create quiz is fail','default', array("class" => 'alert alert-danger'));
             }
-        }
+        }} else{ $this->redirect(['controller' =>'users','action' => 'login']);}
 
     }
 

@@ -8,6 +8,7 @@
 class CategorysController extends AppController {
 
 public function add() {
+    if($this->checkSession()){
     if ($this->request->is('post')) {
     //pr($this->request->data);
     $data = [
@@ -23,7 +24,17 @@ public function add() {
     }else{
         $this->Session->setFlash("fail");
     }
-    }
+    }}
+    else{$this->redirect(['controller' =>'users','action' => 'login']);}
 }
+    public function checkSession(){
+        $User = $this->Session->read('User');
+        if($User==null or $User['User']['role']!=2){
+            return false;
+            $this->redirect(['action' => 'login']);
+        }else{
+            return true;
+        }
+    }
 
 }
